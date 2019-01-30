@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Estates</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item-group *ngFor="let estate of estates">
+        <ion-item-divider color="secondary" >{{estate.regionName}}</ion-item-divider>
+        <ion-list>
+            <ion-item style="cursor: pointer;" *ngFor="let es of estate.regionEstates" (click)="itemTapped($event, es)">
+                <ion-thumbnail item-start>
+                    <img [src]="es.image">
+                </ion-thumbnail>
+                <h2>Ref No. {{es.refNumber}}</h2>
+                <p>{{es.type}}, {{es.bedrooms}} Bedrooms</p>
+                <p>{{selectedLocation.name}}, {{estate.regionName}}</p>
+                <button ion-button clear item-end>View</button>
+            </ion-item>
+        </ion-list>
+  </ion-item-group>
+</ion-content>

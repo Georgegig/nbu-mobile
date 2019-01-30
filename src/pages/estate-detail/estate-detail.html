@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar></ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="refreshAll($event)">
+      <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card>
+      <img [src]="estate.image" />
+      <ion-card-content>
+          <ion-grid>
+              <ion-row>
+                <button ion-button outline *ngIf="!isFavourite" (click)="toggleFavourite()">
+                    <ion-icon name="bookmark"></ion-icon>&nbsp;&nbsp;Save to my estates
+                </button>                  
+              </ion-row>
+              <ion-row>
+                <button ion-button *ngIf="isFavourite" (click)="toggleFavourite()">
+                    <ion-icon name="bookmark"></ion-icon>&nbsp;&nbsp;Remove from my estates
+                </button>                  
+              </ion-row>
+              <ion-row>
+                  <ion-col>{{estate.type}}</ion-col>
+                  <ion-col>Area: {{estate.area}} m<sup>2</sup></ion-col>
+              </ion-row>
+              <ion-row>
+                  <ion-col><ion-badge color="primary">{{estate.bedrooms}}</ion-badge> Bedrooms</ion-col>
+                  <ion-col>Price: {{estate.price | currency:'USD':'symbol':'1.2-2'}}</ion-col>
+              </ion-row>
+              <ion-row></ion-row>
+              <ion-row>
+                  {{estate.address}}
+              </ion-row>
+          </ion-grid>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

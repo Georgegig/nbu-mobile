@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>Ref. No. {{estate.refNumber}}</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+        <ion-segment [(ngModel)]="similarFilter" (ionChange)="filterSimilar(filterToggle, filterByType)">
+            <ion-segment-button value="region">
+                Region
+            </ion-segment-button>
+            <ion-segment-button value="all">
+                All
+            </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-content>
+            <ion-label style="display:inline-block;">Filter By Type: </ion-label>
+            <ion-toggle style="display:inline-block;" (ngModelChange)="changeInFilterToggle($event)" [(ngModel)]="filterToggle"></ion-toggle>
+        </ion-card-content>        
+    </ion-card>
+    
+    <ion-list *ngIf="filterToggle">
+        <ion-item>
+            <ion-label>Type: </ion-label>
+            <ion-select (ngModelChange)="changeInFilter($event)" [(ngModel)]="filterByType">
+                <ion-option value="Apartment">Apartment</ion-option>
+                <ion-option value="House">House</ion-option>
+                <ion-option value="Studio">Studio</ion-option>
+            </ion-select>
+        </ion-item>        
+    </ion-list>
+    <ion-list [virtualScroll]="estates" [approxItemHeight]="'132px'" [headerFn]="getHeader">
+        <ion-item-divider color="secondary" *virtualHeader="let header">
+            {{header}}
+        </ion-item-divider>
+        <ion-item *virtualItem="let estate">
+            <ion-list>
+                <ion-item style="cursor: pointer;" *ngFor="let es of estate.regionEstates" (click)="itemTapped($event, es)">
+                    <ion-thumbnail item-start>
+                        <img [src]="es.image"/>
+                    </ion-thumbnail>    
+                    <h2>Ref No. {{es.refNumber}}</h2>
+                    <p>{{es.type}}, {{es.bedrooms}} Bedrooms</p>
+                    <p>{{locationName}}, {{estate.regionName}}</p>
+                    <button ion-button clear item-end>View</button>
+                </ion-item>
+            </ion-list>
+        </ion-item>
+    </ion-list>
+</ion-content>

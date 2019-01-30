@@ -1,0 +1,7 @@
+{
+  "name": "locations-schedule-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

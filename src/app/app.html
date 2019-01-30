@@ -1,0 +1,23 @@
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Royal Estates</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+        <button menuClose ion-item  (click)="goToLocations()">Find a Location</button>
+    </ion-list>
+    <ion-list>
+        <ion-list-header>Saved locations</ion-list-header>
+        <button menuClose ion-item *ngFor="let fav of favoriteEstates" (click)="goToEstate(fav)">
+          Ref. No {{fav.estate.refNumber}}
+        </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
